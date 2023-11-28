@@ -65,7 +65,7 @@ func Add(w http.ResponseWriter, r *http.Request) {
 func Edit(w http.ResponseWriter, r *http.Request) { 
 
 	if r.Method == "GET" {
-		temp, err := template.ParseFiles("views/category/edit.html")
+		temp, err := template.ParseFiles("views/categories/edit.html")
 
 		if err != nil {
 			panic(err)
@@ -83,18 +83,45 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 			"category": categorymodel.GetById(id),
 		}		
 
-		temp.Execute(w, data)
+		temp.Execute(w, data)		
+	}
+
+
+	if(r.Method == "POST") {
+		var category entities.Category
+		
+		idString := r.FormValue("id")
+		id, err := strconv.Atoi(idString)
+		if err != nil {
+			panic(err)
+		}
+		category.Name = r.FormValue("name")
+		category.UpdatedAt = time.Now()
+
+		if oke := categorymodel.Update(id, category); !oke {
+			temp, _ := template.ParseFiles("views/categories/index.html")
+			temp.Execute(w, nil)
+		}
+
+		http.Redirect(w, r, "/categories", http.StatusSeeOther)
+
 	}
 }
 
 
 func Delete(w http.ResponseWriter, r *http.Request) { 
 
-	temp, err := template.ParseFiles("views/categories/delete.html")
+	idString := r.URL.Query().Get("id")
+	id, err := strconv.Atoi(idString)
 
-	if(err != nil){
+	if err != nil {
 		panic(err)
 	}
 
-	temp.Execute(w, nil)
+	if oke := categorymodel.Delete(id); !oke {
+		temp, _ := template.ParseFiles("views/categories/index.html")
+		temp.Execute(w, nil)
+	}
+
+	http.Redirect(w, r, "/categories", http.StatusSeeOther)
 }
