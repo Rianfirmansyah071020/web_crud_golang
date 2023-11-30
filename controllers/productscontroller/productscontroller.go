@@ -7,13 +7,19 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request){
 
-	temp,err := template.ParseFiles("views/products/index.html")
-	
+	products := productmodel.GetAll()
+
+	data := map[string]any{
+		"products": products,
+	}
+
+	temp, err := template.ParseFiles("views/products/index.html")
+
 	if err != nil {
 		panic(err)
 	}
 
-	temp.Execute(w, nil)
+	temp.Execute(w, data)
 }
 
 
@@ -26,6 +32,16 @@ func Add(w http.ResponseWriter, r *http.Request){
 	}
 
 	temp.Execute(w, nil)
+}
+
+
+func Detail(w http.ResponseWriter, r *http.Request){
+
+	temp,err := template.ParseFiles("views/products/detail.html")
+	
+	if err != nil {
+		panic(err)
+	}
 }
 
 
