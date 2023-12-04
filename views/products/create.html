@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Go Products</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Go Products</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products">Products</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <h2>Add Product</h2>
+      <hr />
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="card p-3 col-lg-6 col-12 bg-light">
+          <form action="/categories/add" method="post">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-lg-3 col-12">
+                <label for="name">Name</label>
+              </div>
+              <div class="col-lg-9 col-12">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="masukan name"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div
+              class="row d-flex justify-content-center align-items-center mt-3"
+            >
+              <div class="col-lg-3 col-12">
+                <label for="category_id">Category</label>
+              </div>
+              <div class="col-lg-9 col-12">
+                <select
+                  name="category_id"
+                  id="category_id"
+                  class="form-control"
+                  required
+                >
+                  {{ range .categories }}
+                  <option value="{{ .Id }}">{{ .Name }}</option>
+                  {{ end }}
+                </select>
+              </div>
+            </div>
+            <div
+              class="row d-flex justify-content-center align-items-center mt-3"
+            >
+              <div class="col-lg-3 col-12">
+                <label for="stoct">Stock</label>
+              </div>
+              <div class="col-lg-9 col-12">
+                <input
+                  type="number"
+                  name="stoct"
+                  id="stoct"
+                  placeholder="masukan stoct"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div
+              class="row d-flex justify-content-center align-items-center mt-3"
+            >
+              <div class="col-lg-3 col-12">
+                <label for="stoct">Description</label>
+              </div>
+              <div class="col-lg-9 col-12">
+                <textarea
+                  name="description"
+                  id="description"
+                  cols="30"
+                  rows="5"
+                  class="form-control"
+                  placeholder="masukan description"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="mt-5 d-flex justify-content-end gap-3">
+              <a href="/categories" class="btn btn-secondary text-light"
+                >back</a
+              >
+              <button type="submit" class="btn btn-primary text-light">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

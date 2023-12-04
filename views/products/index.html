@@ -44,36 +44,42 @@
     <div class="container">
       <h2>List Products</h2>
       <hr />
-      <a href="/categories/add" class="btn btn-primary">Add Product</a>
+      <a href="/products/add" class="btn btn-primary">Add Product</a>
       <table class="table table-bordered table-hover mt-2 text-center">
         <thead class="table-primary">
           <tr>
             <th>Name</th>
             <th>Category</th>
             <th>Stock</th>
-            <th>Description</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <!-- {{ range .categories }}
+          {{ range .products }}
           <tr>
             <td>{{ .Name }}</td>
+            <td>{{ .Category.Name }}</td>
+            <td>{{ .Stock }}</td>
             <td>
               <a
-                href="/categories/edit?id={{ .Id }}"
+                href="/products/detail?id={{ .Id }}"
+                class="btn btn-info text-light"
+                >Detail</a
+              >
+              <a
+                href="/products/edit?id={{ .Id }}"
                 class="btn btn-warning text-light"
                 >Edit</a
               >
               <a
-                href="/categories/delete?id={{ .Id }}"
+                href="/products/delete?id={{ .Id }}"
                 class="btn btn-danger text-light"
                 onclick="return confirm('anda yakin mengahapus data ini ?')"
                 >Delete</a
               >
-            </td> -->
-          <!-- </tr> -->
-          <!-- {{ end }} -->
+            </td>
+          </tr>
+          {{ end }}
         </tbody>
       </table>
     </div>

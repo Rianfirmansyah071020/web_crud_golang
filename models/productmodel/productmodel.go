@@ -28,13 +28,13 @@ func GetAll() []entities.Product {
 	var products []entities.Product
 	for rows.Next() {
 		var product entities.Product
-		err := rows.Scan(product.Id, 
-			product.Name, 
-			product.Category.Name,
-			product.Stock, 
-			product.Description,
-			product.CreatedAt, 
-			product.UpdatedAt)
+		err := rows.Scan(&product.Id, 
+			&product.Name, 
+			&product.Category.Name,
+			&product.Stock, 
+			&product.Description,
+			&product.CreatedAt, 
+			&product.UpdatedAt)
 
 		if err != nil {
 			panic(err)
